@@ -1,0 +1,121 @@
+
+1. Перешли в каталог с веб-сервером xampp
+> cd ../xampp/htdocs/
+
+2. Установили туда Симфони 
+> php -r "file_put_contents('symfony', file_get_contents('https://symfony.com/installer'));"
+
+3. Создаем новый симфони-проект именно с 3.0
+> php symfony new todolist 3.0
+
+4. Настройка ссылки в браузере с "http://localhost/todolist/web/" на "todolist"
+
+	in HOSTS:
+		> 127.0.0.1       localhost
+		> 127.0.0.1       todolist
+	in D:\Software\xampp\apache\conf\extra/httpd-vhosts.conf
+		> 	<VirtualHost *.80>
+		>		DocumentRoot "D:/Software/xampp/htdocs/todolist/web/app_dev.php/"
+		>		ServerName todolist
+		>	</VirtualHost>
+		>
+		>	<VirtualHost *:80>
+		>	    DocumentRoot "D:/Software/xampp/htdocs/todolist/web/app_dev.php"
+		>	    ServerName todolist
+		>	</VirtualHost>
+
+
+5. Открываем папку с проектом в любом редакторе
+
+.twig - template engine {% что-то %}
+
+6. Создали контроллер для новой страницы и указали в комментах ссылку
+	/**
+     * @Route("/todos", name="todo_list")
+     */
+
+7. Создаем шаблоны новых страниц create edit/{id} details/{id} (../todolist/app/Recources/views/todo/)
+
+8. Создаем контроллеры для этих страниц в TodoControlle.php
+
+9. в уроке челик просто скопипастил подключение бутстрапа в проект
+
+10. создали в index.html.twig таблицу
+
+11. сделали базу даных в phpMyAdmin но можно было командой через симфони доктрин
+
+12. генерим ЕНТИИ базы даных? 
+	D:\Software\xampp\htdocs\todolist>
+	> php bin/console doctrine:generate:entity
+		Entity shortcut name 
+			> AppBundle:Todo
+		ConfFormat: 
+			> 'Just press Enter'
+
+		New field name:
+			> name
+
+			Filed type:
+				> enter
+			Field length:
+				> enter
+			is nullable:
+				> enter (false)
+			Unique:
+				> enter (false)
+
+		New Field name:
+			> category
+
+			same
+
+		New Field name:
+			> description
+
+			same
+
+		New Field name:
+			> priority
+
+			same
+
+		New Field name:
+			> due_date
+
+			Filed type:
+				> datetime
+			same
+
+		New Field name:
+			> create_date
+
+			Filed type:
+				> datetime
+			same
+
+
+
+
+13. оно создало кучу всего в ../todolist/src/AppBundle/Entity/Todo.php
+
+14. создаем саму таблицу в БД
+	> php bin/console doctrine:schema:update --force
+
+15. insert some data in phpMyAdmin
+	1
+	Pickup kids
+	Family
+	Pick up kids from schol
+	High
+	2018-06-08 00:00:00
+	2018-06-07 00:00:00
+
+	2
+	Metting with Tim
+	Work
+	Meet Tim at bar
+	Normal
+	2018-06-09 00:00:00
+	2018-06-07 00:00:00
+
+16. /.....
